@@ -15,13 +15,18 @@
 			<th>Ожидание закрытия в</th>
 			<td><?php echo $sla[1]->format('H:i d-m-Y'); ?></td>
 		</tr>
+		<?php if($sla[2] !== 'none'):?>
 		<tr class="even">
-			<th>Зяли в работу</th>
-			<td><?php echo $sla[2]->format('H:i d-m-Y') ?></td>
+			<th>В работе</th>
+			<td><?php 
+			 echo ($sla[2] === 'none') ?  '' :  $sla[2]->format('H:i d-m-Y')  ?></td>
 		</tr>
+	<?php endif; ?>
+		<?php if($sla[3] !== 'none'):?>
 		<tr class="even">
-			<th>Решение</th>
-			<td><?php echo $sla[3]->format('H:i d-m-Y')?></td>
+			<th>Решена</th>
+			<td><?php echo  ($sla[3] === 'none') ?  '' : $sla[3]->format('H:i d-m-Y'); ?></td>
 		</tr>
+	<?php endif; ?>
 	</tbody>
 </table>

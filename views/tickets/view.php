@@ -20,7 +20,6 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,
 'type' => 'bordered condensed',
 'attributes'=>array(
-		
 		'title',
 		'description',
 		'user_id' => array('name' => 'user_id', 'value' => $model->user->first_name.' '.$model->user->last_name),
@@ -35,9 +34,23 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 		),
 ),
 ));
-
 ?>
-<?php $this->widget('tickets.components.ConsiderSla', array(
+<?php 
+// echo "<pre>";
+// print_r($model);
+// echo "</pre>";
+if(empty($model->sla[0]) && empty($model->sla[0])){	
+	$this->widget('tickets.components.ConsiderSla', array(
+	    'params'=>array(
+	     	'create_time' => $model->create_date,
+	      'reaction_time' => new DateInterval('PT2H30M'),
+	      'spent_time' => new DateInterval('PT3H30M'),
+	      'start_work' => new DateInterval('PT8H30M'),
+	      'end_work' =>new DateInterval('PT17H30M'),
+	    )
+	)); 
+}elseif(empty($model->sla[1]) && empty($model->sla[1])){
+	$this->widget('tickets.components.ConsiderSla', array(
     'params'=>array(
      	'create_time' => $model->create_date,
       'reaction_time' => new DateInterval('PT2H30M'),
@@ -45,6 +58,21 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
       'start_work' => new DateInterval('PT8H30M'),
       'end_work' =>new DateInterval('PT17H30M'),
       'A_time' => $model->sla[0]->datetime,
-      'S_time' => $model->sla[1]->datetime,
+      // 'S_time' => $model->sla[1]->datetime,
     )
-)); ?>
+	)); 
+}elseif(!empty($model->sla[1]) && !empty($model->sla[1])){
+$this->widget('tickets.components.ConsiderSla', array(
+    'params'=>array(
+     	'create_time' => $model->create_date,
+      'reaction_time' => new DateInterval('PT2H30M'),
+      'spent_time' => new DateInterval('PT3H30M'),
+      'start_work' => new DateInterval('PT8H30M'),
+      'end_work' =>new DateInterval('PT17H30M'),
+      'A_time' => $model->sla[0]->datetime,
+      // 'S_time' => $model->sla[1]->datetime,
+    )
+	)); 
+}
+?>
+

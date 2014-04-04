@@ -48,6 +48,8 @@ public function accessRules()
 * @param integer $id the ID of the model to be displayed
 */
 		public function actionView($id){
+
+
 			$this->render('view',array(
 			'model'=>$this->loadModel($id),
 			));
@@ -78,34 +80,56 @@ public function accessRules()
 * If update is successful, the browser will be redirected to the 'view' page.
 * @param integer $id the ID of the model to be updated
 */
-		public function actionUpdateStatus($id){
-					$model = self::loadModel($id);
-					if(isset($_POST['Tickets']['status'])){
-							if($_POST['Tickets']['status'] != $model->status){
-									if($model->status != Tickets::TICKET_SOLVED or $model->status != Tickets::TICKET_FAILED or $model->status === Tickets::TICKET_NEW){
+ public function actionUpdate($id){
+  $model = self::loadModel($id);
+  if(isset($_POST['Tickets']['status'])){
+   if($_POST['Tickets']['status'] != $model->status){
+    if($model->status != Tickets::TICKET_SOLVED or $model->status != Tickets::TICKET_FAILED and $model->status === Tickets::TICKET_NEW){
+     $model->status = $_POST['Tickets']['status'];
+     $transaction = Yii::app()->db->beginTransaction();
+     $res = false;
+     try{
+      if($model->save()){
+       $sla = new Sla;
 
-										$model->status = $_POST['Tickets']['status'];
-										if($model->save()){
-											$this->redirect(array('view','id'=>$model->id));
-										}
-									}
-							}
-					}
-					$this->render('_formManager', array('model'=>$model));
-		}
-		public function actionUpdate($id){
-			$model=$this->loadModel($id);
-				if(isset($_POST['Tickets'])){
-					$model->attributes=$_POST['Tickets'];
-					if($model->save()){
-						$this->redirect(array('view','id'=>$model->id));
-					}
-				}
-			$this->render('update',array(
-					'model'=>$model,
-				)
-			);
-		}
+       $sla->manager_id = Yii::app()->user->id;
+       $sla->ticket_id = $id;
+       $sla->status = $model->status;
+       $sla->datetime = date('Y-m-d H:i:s');
+       if($sla->save()){
+        $res = true; 
+        $transaction->commit();
+       }else{
+        $transaction->rollback();
+       }
+      }else{
+       $transaction->rollback();
+      }
+     }catch(Exception $e){
+     	echo $e->getMessage();
+      $transaction->rollback();
+     }
+     if ($res){
+      $this->redirect(array('view','id'=>$model->id));
+     }
+    }
+   }
+  }
+  $this->render('_formManager', array('model'=>$model));
+ }
+		// public function actionUpdate($id){
+		// 	$model=$this->loadModel($id);
+		// 		if(isset($_POST['Tickets'])){
+		// 			$model->attributes=$_POST['Tickets'];
+		// 			if($model->save()){
+		// 				$this->redirect(array('view','id'=>$model->id));
+		// 			}
+		// 		}
+		// 	$this->render('update',array(
+		// 			'model'=>$model,
+		// 		)
+		// 	);
+		// }
 		public function actionSetStatus($id){
 				$model = $this->loadModel($id);
 				$this->render('_formManager',array('model' => $model));

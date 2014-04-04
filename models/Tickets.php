@@ -94,8 +94,6 @@ class Tickets extends CActiveRecord
 		$criteria->compare('user_id',$this->user_id);
 		$criteria->compare('create_date',$this->create_date,true);
 		$criteria->compare('status',$this->status,true);
-		$criteria->compare('reaction',$this->sla->datetime,true);
-		$criteria->compare('solvation',$this->sla->datetime,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
