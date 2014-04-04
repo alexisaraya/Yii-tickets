@@ -1,0 +1,20 @@
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
+	'id'=>'tickets-form',
+	'enableAjaxValidation'=>false,
+)); ?>
+<?php $this->widget('bootstrap.widgets.TbDetailView',array(
+'data'=>$model,
+'attributes'=>array(
+		'id',
+		'title',
+		'description',
+		'user_id',
+		'create_date',
+		'status',
+),
+)); ?>
+
+<div class="form-actions">
+
+</div>
+<?php $this->endWidget(); ?>
