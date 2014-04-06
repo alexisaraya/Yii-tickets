@@ -22,10 +22,12 @@
 			 echo ($sla[2] === 'none') ?  '' :  $sla[2]->format('H:i d-m-Y')  ?></td>
 		</tr>
 	<?php endif; ?>
-		<?php if($sla[3] !== 'none'):?>
+		<?php 
+		
+		if($sla[3] !== 'none'):?>
 		<tr class="even">
 			<th>Решена</th>
-			<td><?php echo  ($sla[3] === 'none') ?  '' : $sla[3]->format('H:i d-m-Y'); ?></td>
+			<td><?php echo $sla[3]->format('H:i d-m-Y'); ?></td>
 		</tr>
 	<?php endif; ?>
 	</tbody>

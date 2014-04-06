@@ -39,18 +39,20 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 // echo "<pre>";
 // print_r($model);
 // echo "</pre>";
-if(empty($model->sla[0]) && empty($model->sla[0])){	
-	$this->widget('tickets.components.ConsiderSla', array(
-	    'params'=>array(
-	     	'create_time' => $model->create_date,
-	      'reaction_time' => new DateInterval('PT2H30M'),
-	      'spent_time' => new DateInterval('PT3H30M'),
-	      'start_work' => new DateInterval('PT8H30M'),
-	      'end_work' =>new DateInterval('PT17H30M'),
-	    )
+if(empty($model->sla[0])){
+$this->widget('tickets.components.ConsiderSla', array(
+    'params'=>array(
+     	'create_time' => $model->create_date,
+      'reaction_time' => new DateInterval('PT2H30M'),
+      'spent_time' => new DateInterval('PT3H30M'),
+      'start_work' => new DateInterval('PT8H30M'),
+      'end_work' =>new DateInterval('PT17H30M'),
+      // 'A_time' => $model->sla[0]->datetime,
+      // 'S_time' => $model->sla[1]->datetime,
+    )
 	)); 
-}elseif(empty($model->sla[1]) && empty($model->sla[1])){
-	$this->widget('tickets.components.ConsiderSla', array(
+}elseif(!empty($model->sla[0]) && empty($model->sla[1])){
+$this->widget('tickets.components.ConsiderSla', array(
     'params'=>array(
      	'create_time' => $model->create_date,
       'reaction_time' => new DateInterval('PT2H30M'),
@@ -61,7 +63,7 @@ if(empty($model->sla[0]) && empty($model->sla[0])){
       // 'S_time' => $model->sla[1]->datetime,
     )
 	)); 
-}elseif(!empty($model->sla[1]) && !empty($model->sla[1])){
+}elseif(!empty($model->sla[0]) && !empty($model->sla[1])){
 $this->widget('tickets.components.ConsiderSla', array(
     'params'=>array(
      	'create_time' => $model->create_date,
@@ -70,7 +72,7 @@ $this->widget('tickets.components.ConsiderSla', array(
       'start_work' => new DateInterval('PT8H30M'),
       'end_work' =>new DateInterval('PT17H30M'),
       'A_time' => $model->sla[0]->datetime,
-      // 'S_time' => $model->sla[1]->datetime,
+      'S_time' => $model->sla[1]->datetime,
     )
 	)); 
 }
