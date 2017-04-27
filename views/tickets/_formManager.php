@@ -1,3 +1,19 @@
+
+
+<?php 
+
+$this->breadcrumbs=array(
+	'Tickets'=>array('index'),
+	$model->title=>array('view','id'=>$model->id),
+	'Update',
+);
+
+$this->menu=array(
+    array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.LIST.TICKET'),'url'=>array('index')),
+    array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.MANAGE.TICKET'),'url'=>array('admin')),
+);
+
+?>
 <?php $this->widget('bootstrap.widgets.TbDetailView',array(
 'data'=>$model,
 'type' => 'bordered condensed',
@@ -17,6 +33,7 @@
 ),
 ));
 ?>
+
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'tickets-form',
 	'enableAjaxValidation'=>false,
@@ -24,11 +41,13 @@
 <?php echo $form->textField($model, 'status', array('class'=>'hidden','value'=>($model->status == Tickets::TICKET_NEW)? Tickets::TICKET_ACTIVE:Tickets::TICKET_SOLVED )); ?>
 <?php if($model->status !== Tickets::TICKET_SOLVED AND $model->status !== Tickets::TICKET_FAILED): ?>
 <div class="form-actions">
-	<?php $this->widget('bootstrap.widgets.TbButton', array(
-			'buttonType'=>'submit',
-			'type'=>'primary',
-			'label'=> ($model->status == "N") ? 'Взять в работу' : 'Решено!',
-		)); ?>
+	
+    
+               <?php echo TbHtml::formActions(array(
+    TbHtml::submitButton(($model->status == "N") ? Yii::t('ticketsModule.contentForm','TAKETOWORK') : Yii::t('ticketsModule.contentForm','RESOLVED') , array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+  
+)); ?>
+  
 </div>
 <?php endif; ?>
 <?php $this->endWidget(); ?>

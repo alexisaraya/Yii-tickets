@@ -4,13 +4,6 @@ $this->breadcrumbs=array(
 	$model->title=>array('view','id'=>$model->id),
 	'Update',
 );
-
-	$this->menu=array(
-	array('label'=>'List Tickets','url'=>array('index')),
-	array('label'=>'Create Tickets','url'=>array('create')),
-	array('label'=>'View Tickets','url'=>array('view','id'=>$model->id)),
-	array('label'=>'Manage Tickets','url'=>array('admin')),
-	);
 	?>
 
 <h1>Update Tickets <?php echo $model->id; ?> </h1>
@@ -19,3 +12,13 @@ $this->breadcrumbs=array(
 <?php else: ?>
 	<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
 <?php endif; ?>
+
+<?php 
+$this->menu=array(
+	array('label'=>'List Tickets','url'=>array('index')),
+	array('label'=>'Create Tickets','url'=>array('create')),
+	array('label'=>'View Tickets','url'=>array('view','id'=>$model->id)),
+	array('label'=>'Manage Tickets','url'=>array('admin')),
+	);
+
+?>

@@ -60,13 +60,13 @@ class Tickets extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'title' => 'Заголовок',
-			'description' => 'Описание',
-			'user_id' => 'Пользователь',
-			'create_date' => 'Дата создания',
-			'status' => 'Статус',
-			'reaction' => 'Регирование',
-			'solation' => 'Решение',
+			'title' => Yii::t('ticketsModule.contentForm', 'SUBJECT'),
+			'description' => Yii::t('ticketsModule.contentForm', 'DESCRIPTION'),
+			'user_id' => Yii::t('ticketsModule.contentForm', 'USER'),
+			'create_date' => Yii::t('ticketsModule.contentForm', 'DATE.CREATE'),
+			'status' => Yii::t('ticketsModule.contentForm', 'STATUS'),
+			'reaction' => Yii::t('ticketsModule.contentForm', 'REGISTRATION'),
+			'solation' => Yii::t('ticketsModule.contentForm', 'RESOLUTION'),
 		);
 	}
 
@@ -121,16 +121,16 @@ public function getStatusName($status=null)
     switch($status)
     {
         case self::TICKET_NEW:
-            return 'Свежак';
+            return 'Nuevo';
             break;
         case self::TICKET_ACTIVE:
-            return 'В работе';
+            return 'Activo';
             break;
         case self::TICKET_SOLVED:
-        		return 'Решено';
+        		return 'Resuelto';
         		break;
         case self::TICKET_FAILED:
-        		return 'Проебано!';
+        		return 'Rechazado';
         		break;
         default:
             return 'Unknown';

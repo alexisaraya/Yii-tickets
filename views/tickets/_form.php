@@ -6,13 +6,13 @@
 <p class="help-block">Fields with <span class="required">*</span> are required.</p>
 
 <?php echo $form->errorSummary($model); ?>
-	<?php echo $form->textFieldRow($model,'title',array('class'=>'span5','maxlength'=>255)); ?>
-	<?php echo $form->textAreaRow($model,'description',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+	<?php echo $form->textField($model,'title',array('class'=>'span5','maxlength'=>255)); ?>
+	<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 <div class="form-actions">
-	<?php $this->widget('bootstrap.widgets.TbButton', array(
-			'buttonType'=>'submit',
-			'type'=>'primary',
-			'label'=>$model->isNewRecord ? 'Создать' : 'Сохранить',
-		)); ?>
+	
+               <?php echo TbHtml::formActions(array(
+    TbHtml::submitButton($model->isNewRecord ? 'Nuevo' : 'Actualizar', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
+  
+)); ?>
 </div>
 <?php $this->endWidget(); ?>

@@ -5,8 +5,9 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Tickets','url'=>array('index')),
-array('label'=>'Create Tickets','url'=>array('create')),
+
+array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.LIST.TICKET'),'url'=>array('index')),
+array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.CREATE.TICKET'),'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -23,7 +24,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Tickets</h1>
+<h1><?php echo Yii::t('ticketsModule.contentForm', 'LABEL.MANAGE.TICKET') ?></h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>

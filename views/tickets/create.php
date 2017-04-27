@@ -5,11 +5,11 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Tickets','url'=>array('index')),
-array('label'=>'Manage Tickets','url'=>array('admin')),
+    array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.LIST.TICKET'),'url'=>array('index')),
+    array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.MANAGE.TICKET'),'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Tickets</h1>
+<h1><?php echo Yii::t('ticketsModule.contentForm', 'LABEL.CREATE.TICKET') ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

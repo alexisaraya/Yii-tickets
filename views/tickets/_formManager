@@ -15,6 +15,6 @@
 )); ?>
 
 <div class="form-actions">
-
+sds
 </div>
 <?php $this->endWidget(); ?>

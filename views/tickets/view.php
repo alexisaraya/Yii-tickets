@@ -5,11 +5,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'List Tickets','url'=>array('index')),
-array('label'=>'Create Tickets','url'=>array('create')),
-array('label'=>'Update Tickets','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Tickets','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Tickets','url'=>array('admin')),
+  
+array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.LIST.TICKET'),'url'=>array('index')),
+array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.CREATE.TICKET'),'url'=>array('create')),
+array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.UPDATE.TICKET'),'url'=>array('update','id'=>$model->id)),
+array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.DELETE.TICKET'),'url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>Yii::t('ticketsModule.contentForm', 'LABEL.MANAGE.TICKET'),'url'=>array('admin')),
 );
 ?>
 
@@ -35,6 +36,7 @@ $this->widget('bootstrap.widgets.TbDetailView',array(
 ),
 ));
 ?>
+
 <?php 
 // echo "<pre>";
 // print_r($model);
